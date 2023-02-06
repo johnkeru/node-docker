@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=keru
+      - MONGO_INITDB_ROOT_PASSWORD=keru
+    volumes:
+      - node_volume:/data/db
+
+  mongoexpress:
+    image: mongo-express
+    container_name: mongoexpress
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=keru
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=keru
+    depends_on:
+      - mongodb
+
+volumes:
+  node_volume:
+    driver: local

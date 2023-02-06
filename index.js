@@ -7,11 +7,10 @@ app.listen(5000, () => console.log("app is running on port::5000🚀"));
 
 MongoClient.connect("mongodb://keru:keru@localhost:27017").then((client) => {
   const db = client.db("user-account");
-  const collection = db.collection("users");
+  const collection = db.collection("yusers");
 
   app.get("/", async (req, res) => {
     const users = await collection.find().toArray();
-    client.close();
     return res.json(users);
   });
 
